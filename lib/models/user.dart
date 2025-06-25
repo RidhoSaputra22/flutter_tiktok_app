@@ -1,20 +1,22 @@
 class User {
-  String id;
-  String nama;
-  String tanggal_lahir;
-  String gender;
-  String email;
-  String password;
-  String photo;
+  String? id;
+  String? nama;
+  String? tanggal_lahir;
+  String? gender;
+  String? email;
+  String? phone;
+  String? password;
+  String? photo;
 
   User({
-    required this.id,
-    required this.nama,
-    required this.tanggal_lahir,
-    required this.gender,
-    required this.email,
-    required this.password,
-    required this.photo,
+    this.id,
+    this.nama,
+    this.tanggal_lahir,
+    this.gender,
+    this.email,
+    this.phone,
+    this.password,
+    this.photo,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -23,6 +25,7 @@ class User {
         tanggal_lahir: json['tanggal_lahir'],
         gender: json['gender'],
         email: json['email'],
+        phone: json['phone'],
         password: "",
         photo: json['photo'],
       );
@@ -33,6 +36,7 @@ class User {
         'tanggal_lahir': tanggal_lahir,
         'gender': gender,
         'email': email,
+        'phone': email,
         'password': password,
         'photo': photo,
       };

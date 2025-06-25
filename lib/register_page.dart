@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tiktok_app/models/auth.dart';
+import 'package:flutter_tiktok_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -32,23 +34,18 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => isLoading = true);
 
     try {
-      final response = await http.post(
-        // Ganti localhost dengan IP komputer kamu jika testing di device/emulator fisik
-        Uri.parse("http://localhost:3000/register"),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"phone_number": phone, "password": password}),
-      );
+      final response =
+          await AuthService.register(User(phone: phone, password: password));
 
-      if (response.statusCode == 201) {
+      if (response) {
         // Registrasi berhasil, langsung ke HomePage
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const HomePage()),
         );
       } else {
-        final res = jsonDecode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(res['message'] ?? 'Gagal registrasi')),
+          SnackBar(content: Text('Gagal registrasi')),
         );
       }
     } catch (e) {
@@ -131,13 +128,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   onPressed: isLoading ? null : register,
-                  child:
-                      isLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                            "Daftar",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                  child: isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text(
+                          "Daftar",
+                          style: TextStyle(color: Colors.white),
+                        ),
                 ),
                 const SizedBox(height: 24),
                 const Divider(color: Colors.white24),
