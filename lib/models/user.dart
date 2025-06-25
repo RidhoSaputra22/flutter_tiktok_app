@@ -36,7 +36,7 @@ class User {
         'tanggal_lahir': tanggal_lahir,
         'gender': gender,
         'email': email,
-        'phone': email,
+        'phone': phone,
         'password': password,
         'photo': photo,
       };
