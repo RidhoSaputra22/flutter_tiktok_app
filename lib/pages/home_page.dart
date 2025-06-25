@@ -431,7 +431,7 @@ class _HomePageState extends State<HomePage> {
                             : const Center(child: CircularProgressIndicator()),
                         Positioned(
                             bottom: 40,
-                            left: 10,
+                            left: isMobile ? 20 : 40,
                             child: Container(
                               width: 300,
                               child: Column(
